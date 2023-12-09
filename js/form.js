@@ -1,8 +1,8 @@
 /*
  * @Author: yaojinxi 864554492@qq.com
  * @Date: 2023-12-01 16:02:10
- * @LastEditors: yaojinxi 864554492@qq.com
- * @LastEditTime: 2023-12-01 16:46:51
+ * @LastEditors: yao 864554492@qq.com
+ * @LastEditTime: 2023-12-09 12:43:00
  * @FilePath: \CA-WD\NCI_web-design_CA\js\form.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -44,7 +44,7 @@
         $(".game-modal").hide();
     if (isYes) {
         // 执行跳转到别的页面的逻辑
-        window.location.href = "https://www.baidu.com"; // 请替换为你想要跳转的页面
+        window.location.href = "../pages/game1.html"; // 请替换为你想要跳转的页面
         
     } else {
         // 执行关闭窗口的逻辑
