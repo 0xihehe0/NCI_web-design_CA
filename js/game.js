@@ -1,24 +1,24 @@
 $(document).ready(function () {
-    var game = $('.game');
-    var gameRole = $('.game-role');
-    var playerWidth = gameRole.width();
-    var gameWidth = game.width();
-    var playerLeft = parseInt(gameRole.css('left'));
-    var moveSpeed = 10;
-    var gameOverPrinted = false;
-    var fallingBlockFrequency = 500; // Default frequency (0.5 second)
-    var specialBlockFrequency = 8000; // Frequency for special block (8 seconds)
-    var specialBlockEffectDuration = 8000; // Duration of the effect of special block ("#")
-    var exclamationBlockFrequency = 10000; // 10 seconds
-    var specialBlockEffectStartTime = 0; // Timestamp to track when the special block effect started
-    var totalScore = 0;
-    var timeRemaining = 60; // 1 minute
+    let game = $('.game');
+    let gameRole = $('.game-role');
+    let playerWidth = gameRole.width();
+    let gameWidth = game.width();
+    let playerLeft = parseInt(gameRole.css('left'));
+    let moveSpeed = 10;
+    let gameOverPrinted = false;
+    let fallingBlockFrequency = 500; // Default frequency (0.5 second)
+    let specialBlockFrequency = 8000; // Frequency for special block (8 seconds)
+    let specialBlockEffectDuration = 8000; // Duration of the effect of special block ("#")
+    let exclamationBlockFrequency = 10000; // 10 seconds
+    let specialBlockEffectStartTime = 0; // Timestamp to track when the special block effect started
+    let totalScore = 0;
+    let timeRemaining = 60; // 1 minute
 
     // Function to generate a random color
     function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
@@ -26,28 +26,28 @@ $(document).ready(function () {
 
     // Function to create a falling block
     function createFallingBlock() {
-        var block = $('<div class="falling-block"></div>');
+        let block = $('<div class="falling-block"></div>');
         game.append(block);
 
         // Set a random horizontal position within the game container
-        var randomLeft =
+        let randomLeft =
             Math.random() * (game.width() - block.width());
         block.css('left', randomLeft);
 
         // Set a random size based on a number between 1 and 9
-        var blockSize = Math.floor(Math.random() * 9) + 1;
-        var blockDimension = 16 + (25 - 16) * (blockSize / 9);
+        let blockSize = Math.floor(Math.random() * 9) + 1;
+        let blockDimension = 16 + (25 - 16) * (blockSize / 9);
         block.width(blockDimension);
         block.height(blockDimension);
 
         // Set a random background color
         block.css('background-color', getRandomColor());
         // Set a random number and display it on the block
-        var randomNumber = Math.floor(Math.random() * 9) + 1;
+        let randomNumber = Math.floor(Math.random() * 9) + 1;
         block.text(randomNumber);
 
         // Set the falling speed based on the block size (1 is slowest, 9 is fastest)
-        var fallingBlockSpeed = randomNumber;
+        let fallingBlockSpeed = randomNumber;
 
         // Animate the block to move from top to bottom with the calculated speed
         block.animate(
@@ -67,11 +67,11 @@ $(document).ready(function () {
 
     // Function to create a special falling block (with + or # symbol)
     function createSpecialBlock(symbol) {
-        var specialBlock = $('<div class="falling-block"></div>');
+        let specialBlock = $('<div class="falling-block"></div>');
         game.append(specialBlock);
 
         // Set a random horizontal position within the game container
-        var randomLeft =
+        let randomLeft =
             Math.random() * (game.width() - specialBlock.width());
         specialBlock.css('left', randomLeft);
 
@@ -115,10 +115,10 @@ $(document).ready(function () {
     // Function to check collision between game-role and falling-block
     // Function to check collision between game-role and falling-block
     function checkCollision() {
-        var gameRolePosition = gameRole.position();
+        let gameRolePosition = gameRole.position();
         $('.falling-block').each(function () {
-            var fallingBlock = $(this);
-            var fallingBlockPosition = fallingBlock.position();
+            let fallingBlock = $(this);
+            let fallingBlockPosition = fallingBlock.position();
 
             if (
                 gameRolePosition.left <
@@ -133,7 +133,7 @@ $(document).ready(function () {
                     fallingBlockPosition.top
             ) {
                 // Collision detected
-                var blockContent = fallingBlock.text();
+                let blockContent = fallingBlock.text();
                 console.log(blockContent, 'blockContent');
                 if (blockContent === '+') {
                     // Special block with + symbol
@@ -163,7 +163,7 @@ $(document).ready(function () {
                     console.log(blockContent, 'blockContent');
                     // Regular block with a number
                     if (blockContent) {
-                        var blockNumber = parseInt(blockContent);
+                        let blockNumber = parseInt(blockContent);
                         totalScore += blockNumber;
                     }
 
@@ -206,13 +206,13 @@ $(document).ready(function () {
     }
 
     // Call createFallingBlock and createSpecialBlock based on fallingBlockFrequency
-    var fallingBlockInterval = setInterval(function () {
+    let fallingBlockInterval = setInterval(function () {
         createFallingBlock();
     }, fallingBlockFrequency);
 
-    var fallingSpecialBlockInterval = setInterval(function () {
-        var symbols = ['+', '#', '!']; // Add any new special symbols here
-        var randomSymbol =
+    let fallingSpecialBlockInterval = setInterval(function () {
+        let symbols = ['+', '#', '!']; // Add any new special symbols here
+        let randomSymbol =
             symbols[Math.floor(Math.random() * symbols.length)];
         createSpecialBlock(randomSymbol);
 
@@ -230,7 +230,7 @@ $(document).ready(function () {
     setInterval(checkCollision, 50);
 
     // Call updateTimer every second
-    var timerInterval = setInterval(updateTimer, 1000);
+    let timerInterval = setInterval(updateTimer, 1000);
 
     // Move game-role left or right based on keypress
     $(document).keydown(function (e) {
